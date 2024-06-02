@@ -188,6 +188,7 @@ void readCard(){
                       asciiDataLrn += (char)buffer[i];
                       asciiDataLrn.trim();
                     }
+                    delay(200);
                     Serial.println("Data Available:");
                     Serial.println(asciiDatafName);
                     Serial.println(asciiDatalName);

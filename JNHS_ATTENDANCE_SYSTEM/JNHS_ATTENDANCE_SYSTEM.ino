@@ -211,9 +211,7 @@ void readCard(){
 }
 
 void Indicator(){
-  digitalWrite(LED_G, HIGH);
   digitalWrite(BUZZER, HIGH);
-
   // Display translated data on LCD
   lcd.clear();
   lcd.print(asciiDatafName.substring(0,16));
@@ -230,7 +228,6 @@ void Indicator(){
   lcd.print("   Thank You!");
   delay(600);
   lcd.clear();
-  digitalWrite(LED_G, LOW);
 }
 
 void SortStudent(){

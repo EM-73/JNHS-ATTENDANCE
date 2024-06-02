@@ -212,12 +212,15 @@ void readCard(){
 }
 
 void Indicator(){
+  String temp1 = asciiDatafName.substring(0,16);
+  String temp2 = asciiDatalName.substring(0,16);
+  delay(100);
   digitalWrite(BUZZER, HIGH);
   // Display translated data on LCD
   lcd.clear();
-  lcd.print(asciiDatafName.substring(0,16));
+  lcd.print(temp1);
   lcd.setCursor(0, 1);
-  lcd.print(asciiDatalName.substring(0, 16));
+  lcd.print(temp2);
   digitalWrite(BUZZER, LOW);
   delay(1000);
   lcd.clear();

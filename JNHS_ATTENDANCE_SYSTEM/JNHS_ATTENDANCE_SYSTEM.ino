@@ -212,8 +212,14 @@ void readCard(){
 }
 
 void Indicator(){
-  String temp1 = asciiDatafName.substring(0,16);
-  String temp2 = asciiDatalName.substring(0,16);
+  String temp1 = asciiDatafName;
+  if (asciiDatafName.length() > 16) {
+    asciiDatafName.substring(0,16);
+  }
+  String temp2 = asciiDatalName;
+  if (asciiDatafName.length() > 16) {
+    asciiDatalName.substring(0,16);
+  }
   delay(100);
   digitalWrite(BUZZER, HIGH);
   // Display translated data on LCD

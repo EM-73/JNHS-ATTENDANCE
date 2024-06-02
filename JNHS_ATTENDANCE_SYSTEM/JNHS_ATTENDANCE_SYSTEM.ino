@@ -212,10 +212,18 @@ void readCard(){
 }
 
 void Indicator(){
-  String temp1 = asciiDatafName.substring(0,15);
-  String temp2 = asciiDatalName.substring(0,15);
+  String temp1 = asciiDatafName;
+  if (asciiDatafName.length() > 16) {
+    temp1 = asciiDatafName.substring(0,15);
+  }
+  String temp2 = asciiDatalName;
+  if (asciiDatafName.length() > 16) {
+    temp2 = asciiDatalName.substring(0,15);
+  }
   delay(100);
   digitalWrite(BUZZER, HIGH);
+  Serial.println(temp1);
+  Serial.println(temp2);
   // Display translated data on LCD
   lcd.clear();
   lcd.print(temp1);

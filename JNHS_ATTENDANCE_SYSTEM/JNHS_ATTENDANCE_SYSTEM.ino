@@ -126,69 +126,75 @@ void Clock(){
 
 
 void readCard(){
+  delay(40);
   if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()){
     Serial.println("Card Present");
     // Authenticate with the default key for the specified sector
+    delay(40);
     if (mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, sectorfName * 4 + 3, &key, &(mfrc522.uid)) == MFRC522::STATUS_OK) {
 
       // Read data from the specified block
-      byte buffer[18];
-      byte bufferSize = sizeof(buffer);
-      MFRC522::StatusCode status = mfrc522.MIFARE_Read(blockfName, buffer, &bufferSize);
+      byte bufferfName[18];
+      byte bufferSizefName = sizeof(bufferfName);
+      MFRC522::StatusCode status = mfrc522.MIFARE_Read(blockfName, bufferfName, &bufferSizefName);
+      delay(40);
       if (status == MFRC522::STATUS_OK) {
         // Translate hexadecimal data to ASCII string
         asciiDatafName = "";
 
-        for (byte i = 0; i < bufferSize; i++) {
+
+        for (byte i = 0; i < bufferSizefName; i++) {
           // Check if the byte is an alphabet character (A-Z or a-z)
-          if ((buffer[i] >= 'A' && buffer[i] <= 'Z') || (buffer[i] >= 'a' && buffer[i] <= 'z' || buffer[i] == ' ')) {
-            asciiDatafName += (char)buffer[i];
+          if ((bufferfName[i] >= 'A' && bufferfName[i] <= 'Z') || (bufferfName[i] >= 'a' && bufferfName[i] <= 'z' || bufferfName[i] == ' ')) {
+            asciiDatafName += (char)bufferfName[i];
           } 
         }
+        delay(40);
         if (mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, sectorlName * 4 + 3, &key, &(mfrc522.uid)) == MFRC522::STATUS_OK) {
           // Read data from the specified block
-          byte buffer[18];
-          byte bufferSize = sizeof(buffer);
-          MFRC522::StatusCode status = mfrc522.MIFARE_Read(blocklName, buffer, &bufferSize);
+          byte bufferlName[18];
+          byte bufferSizelName = sizeof(bufferlName);
+          MFRC522::StatusCode status = mfrc522.MIFARE_Read(blocklName, bufferlName, &bufferSizelName);
           if (status == MFRC522::STATUS_OK) {
             // Translate hexadecimal data to ASCII string
             asciiDatalName = "";
 
-            for (byte i = 0; i < bufferSize; i++) {
+            for (byte i = 0; i < bufferSizelName; i++) {
               // Check if the byte is an alphabet character (A-Z or a-z)
-              if ((buffer[i] >= 'A' && buffer[i] <= 'Z') || (buffer[i] >= 'a' && buffer[i] <= 'z' || buffer[i] == ' ')) {
-                asciiDatalName += (char)buffer[i];
+              if ((bufferlName[i] >= 'A' && bufferlName[i] <= 'Z') || (bufferlName[i] >= 'a' && bufferlName[i] <= 'z' || bufferlName[i] == ' ')) {
+                asciiDatalName += (char)bufferlName[i];
               } 
             }
+            delay(40);
             if (mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, sectorStrand * 4 + 3, &key, &(mfrc522.uid)) == MFRC522::STATUS_OK) {
               // Read data from the specified block
-              byte buffer[18];
-              byte bufferSize = sizeof(buffer);
-              MFRC522::StatusCode status = mfrc522.MIFARE_Read(blockStrand, buffer, &bufferSize);
+              byte bufferStrand[18];
+              byte bufferSizeStrand = sizeof(bufferStrand);
+              MFRC522::StatusCode status = mfrc522.MIFARE_Read(blockStrand, bufferStrand, &bufferSizeStrand);
               if (status == MFRC522::STATUS_OK) {
                 // Translate hexadecimal data to ASCII string
                 asciiDataStrand = "";
                   
-                for (byte i = 0; i < bufferSize; i++) {
+                for (byte i = 0; i < bufferSizeStrand; i++) {
                   // Check if the byte is an alphabet character (A-Z or a-z)
-                  if ((buffer[i] >= '0' && buffer[i] <= '9' || buffer[i] >= 'A' && buffer[i] <= 'Z') || (buffer[i] >= 'a' && buffer[i] <= 'z' || buffer[i] == ' ' || buffer[i] == '-')) {
-                    asciiDataStrand += (char)buffer[i];
+                  if ((bufferStrand[i] >= '0' && bufferStrand[i] <= '9' || bufferStrand[i] >= 'A' && bufferStrand[i] <= 'Z') || (bufferStrand[i] >= 'a' && bufferStrand[i] <= 'z' || bufferStrand[i] == ' ' || bufferStrand[i] == '-')) {
+                    asciiDataStrand += (char)bufferStrand[i];
                   } 
                 }
+                delay(40);
                 if (mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, sectorLrn * 4 + 3, &key, &(mfrc522.uid)) == MFRC522::STATUS_OK) {
                   // Read data from the specified block
-                  byte buffer[18];
-                  byte bufferSize = sizeof(buffer);
-                  MFRC522::StatusCode status = mfrc522.MIFARE_Read(blockLrn, buffer, &bufferSize);
+                  byte bufferLrn[18];
+                  byte bufferSizeLrn = sizeof(bufferLrn);
+                  MFRC522::StatusCode status = mfrc522.MIFARE_Read(blockLrn, bufferLrn, &bufferSizeLrn);
                   if (status == MFRC522::STATUS_OK) {
                     // Translate hexadecimal data to ASCII string
                     asciiDataLrn = "";
                   
-                    for (byte i = 0; i < 12; i++) {
-                      asciiDataLrn += (char)buffer[i];
+                    for (byte i = 0; i < bufferSizeLrn; i++) {
+                      asciiDataLrn += (char)bufferLrn[i];
                       asciiDataLrn.trim();
                     }
-                    delay(200);
                     Serial.println("Data Available:");
                     Serial.println(asciiDatafName);
                     Serial.println(asciiDatalName);
@@ -212,23 +218,14 @@ void readCard(){
 }
 
 void Indicator(){
-  String temp1 = asciiDatafName;
-  if (asciiDatafName.length() > 16) {
-    temp1 = asciiDatafName.substring(0,15);
-  }
-  String temp2 = asciiDatalName;
-  if (asciiDatafName.length() > 16) {
-    temp2 = asciiDatalName.substring(0,15);
-  }
-  delay(100);
+  digitalWrite(LED_G, HIGH);
   digitalWrite(BUZZER, HIGH);
-  Serial.println(temp1);
-  Serial.println(temp2);
+
   // Display translated data on LCD
   lcd.clear();
-  lcd.print(temp1);
+  lcd.print(asciiDatafName);
   lcd.setCursor(0, 1);
-  lcd.print(temp2);
+  lcd.print(asciiDatalName);
   digitalWrite(BUZZER, LOW);
   delay(1000);
   lcd.clear();
@@ -240,6 +237,7 @@ void Indicator(){
   lcd.print("   Thank You!");
   delay(600);
   lcd.clear();
+  digitalWrite(LED_G, LOW);
 }
 
 void SortStudent(){

@@ -216,9 +216,9 @@ void Indicator(){
 
   // Display translated data on LCD
   lcd.clear();
-  lcd.print(asciiDatafName);
+  lcd.print(asciiDatafName.substring(0,16));
   lcd.setCursor(0, 1);
-  lcd.print(asciiDatalName);
+  lcd.print(asciiDatalName.substring(0, 16));
   digitalWrite(BUZZER, LOW);
   delay(1000);
   lcd.clear();
